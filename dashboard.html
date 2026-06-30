@@ -3,116 +3,517 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comeback Warrior - colorful Dashboard</title>
+    <title>Comeback Warrior App</title>
+    <!-- Google Fonts for Stylish Cursive and Bold Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #FF9A9E 0%, #FECFEF 99%, #FECFEF 100%);
-            margin: 0;
-            display: flex;
-            height: 100vh;
-            color: #333;
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            --warrior-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --success-color: #4ade80;
+            --text-main: #f8fafc;
+            --text-muted: #64748b;
         }
-        .sidebar {
-            width: 260px;
-            background: linear-gradient(to bottom, #89F7FE 0%, #66A6FF 100%);
-            color: white;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #020617;
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        /* App Container: Simulates a real mobile app structure */
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            height: 850px;
+            background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+            border-radius: 35px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
             display: flex;
             flex-direction: column;
-            padding: 25px;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 4px solid #1e293b;
+            position: relative;
         }
-        .sidebar h2 {
-            font-size: 26px;
-            margin-bottom: 40px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .sidebar li {
-            margin-bottom: 15px;
-        }
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            padding: 12px 18px;
-            display: flex;
-            align-items: center;
-            border-radius: 8px;
-            transition: background 0.3s;
-            font-weight: 500;
-        }
-        .sidebar a:hover, .sidebar a.active {
-            background-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .main-content {
+
+        /* Main Content Area */
+        .app-content {
             flex: 1;
-            padding: 50px;
             overflow-y: auto;
-            background: rgba(255, 255, 255, 0.85);
+            padding: 24px;
+            padding-bottom: 90px;
         }
-        .header {
+
+        .screen {
+            display: none;
+            height: 100%;
+        }
+
+        .screen.active {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            animation: appSlideIn 0.4s cubic-bezier(0.1, 1, 0.1, 1);
+        }
+
+        @keyframes appSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SCREEN 1: HOME / WELCOME SCREEN --- */
+        .welcome-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 40px;
+            height: 100%;
+            text-align: center;
+            gap: 25px;
+            padding-top: 20px;
         }
-        .header h1 {
-            color: #4A00E0;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+
+        .welcome-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: -10px;
         }
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+
+        .welcome-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-transform: uppercase;
         }
-        .card {
-            background: linear-gradient(to right, #F8BBD0, #E1BEE7);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            transition: transform 0.3s;
+
+        /* Big Bold Center Character/Avatar Card */
+        .warrior-avatar-card {
+            width: 180px;
+            height: 180px;
+            background: var(--warrior-gradient);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 35px rgba(239, 68, 68, 0.4);
+            border: 6px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin: 15px 0;
         }
-        .card:hover {
-            transform: translateY(-5px);
+
+        /* Using SVG for a clean, fierce warrior helmet emblem */
+        .warrior-avatar-card svg {
+            width: 90px;
+            height: 90px;
+            fill: #ffffff;
         }
-        .card h3 {
-            margin-top: 0;
-            color: #8E24AA;
+
+        /* Massive Central Motivation Quote Box */
+        .motivation-container {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 24px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .quote-text {
+            font-size: 1.15rem;
+            font-weight: 700;
+            line-height: 1.6;
+            color: #f1f5f9;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .quote-author {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            font-weight: 800;
+        }
+
+        .action-hint {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        /* --- SCREEN 2: DASHBOARD (TODO LIST) --- */
+        .progress-card {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .progress-text {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar-bg {
+            background: #1e293b;
+            height: 14px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #00f2fe, #4ade80);
+            width: 0%;
+            height: 100%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .task-item {
+            background: #1e293b;
+            padding: 18px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-left: 6px solid var(--accent-color);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .task-item.completed {
+            border-left-color: var(--success-color);
+            background: #111827;
+            opacity: 0.5;
+        }
+
+        .task-info h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .task-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .task-item.completed .task-info h3 {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .check-btn {
+            background: #334155;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            pointer-events: none;
+        }
+
+        .task-item.completed .check-btn {
+            background: var(--success-color);
+            color: #0f172a;
+        }
+
+        /* --- SCREEN 3: GROUP CHAT --- */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            height: 480px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .chat-bubble {
+            padding: 12px 16px;
+            border-radius: 20px;
+            max-width: 80%;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .chat-bubble.me {
+            background: linear-gradient(135deg, #0052d4, #4364f7);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-bubble.friend {
+            background: #1e293b;
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        /* --- BOTTOM NAVIGATION BAR --- */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: #0f172a;
+            border-top: 1px solid #1e293b;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 12px;
+            z-index: 10;
+        }
+
+        .nav-item {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            width: 33%;
+        }
+
+        .nav-item.active {
+            color: var(--accent-color);
+        }
+
+        .nav-item svg {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+            transition: transform 0.2s;
+        }
+
+        .nav-item.active svg {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Comeback Warrior</h2>
-        <ul>
-            <li><a href="#" class="active">Dashboard</a></li>
-            <li><a href="todo.html">To-Do List</a></li>
-            <li><a href="tracker.html">Goal Tracker</a></li>
-        </ul>
+
+    <div class="app-container">
+        
+        <!-- Main Application Content Screen Switcher -->
+        <main class="app-content">
+
+            <!-- SCREEN 1: APP HOME PAGE (WELCOME SCREEN) -->
+            <div id="screen-home" class="screen active">
+                <div class="welcome-container">
+                    <div>
+                        <h1 class="welcome-title">Welcome</h1>
+                        <h2 class="welcome-subtitle">Warrior!</h2>
+                    </div>
+
+                    <!-- Large Center Accent Graphic (Warrior Helmet Mask) -->
+                    <div class="warrior-avatar-card">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.47.16.03.3-.04.36-.19l1.12-3.13c-1.39-.44-2.45-1.63-2.77-3.15H9.5c.37 2.13 2.21 3.5 4.35 3.12 1.63-.29 2.85-1.58 3.07-3.12h1.94c-.37 2.13-2.21 3.5-4.35 3.12l1.09 3.06c.05.15.2.22.35.17C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10zm0 4.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 10.38 9.5 9s1.12-2.5 2.5-2.5z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Dynamic Motivation Quote Container in Center -->
+                    <div class="motivation-container">
+                        <div class="quote-text" id="daily-quote">"The format of your future is hidden in your daily execution."</div>
+                        <div class="quote-author" id="quote-author">Comeback Protocol</div>
+                    </div>
+
+                    <div class="action-hint">Tap "Daily Tasks" below to begin your grind ⚡</div>
+                </div>
+            </div>
+
+            <!-- SCREEN 2: DASHBOARD (TODO LIST) -->
+            <div id="screen-dashboard" class="screen">
+                <h2 style="margin-bottom: 15px; font-weight: 800; font-size: 1.4rem;">July 1, 2026</h2>
+                
+                <!-- Progress Widget -->
+                <div class="progress-card">
+                    <div class="progress-text">Today's Protocol: <span id="progress-percent">0%</span> Cleared</div>
+                    <div class="progress-bar-bg">
+                        <div id="progress-fill" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+
+                <!-- 6 Pre-set Daily Warrior Slots -->
+                <div class="task-list">
+                    <div class="task-item" onclick="toggleTask(this)">
+                        <div class="task-info">
+                            <h3>Subject 1: Core Target</h3>
+                            <p>⏱️ Focus Window: 2.0 Hours</p>
+                        </div>
+                        <div class="check-btn">✓</div>
+                    </div>
+                    <div class="task-item" onclick="toggleTask(this)">
+                        <div class="task-info">
+                            <h3>Subject 2: High Yield Revision</h3>
+                            <p>⏱️ Focus Window: 1.5 Hours</p>
+                        </div>
+                        <div class="check-btn">✓</div>
+                    </div>
+                    <div class="task-item" onclick="toggleTask(this)">
+                        <div class="task-info">
+                            <h3>Subject 3: Intensive Drill</h3>
+                            <p>⏱️ Focus Window: 1.0 Hours</p>
+                        </div>
+                        <div class="check-btn">✓</div>
+                    </div>
+                    <div class="task-item" onclick="toggleTask(this)">
+                        <div class="task-info">
+                            <h3>Subject 4: Critical Diagnostics</h3>
+                            <p>⏱️ Focus Window: 2.0 Hours</p>
+                        </div>
+                        <div class="check-btn">✓</div>
+                    </div>
+                    <div class="task-item" onclick="toggleTask(this)">
+                        <div class="task-info">
+                            <h3>Subject 5: Backlog Liquidation</h3>
+                            <p>⏱️ Focus Window: 1.5 Hours</p>
+                        </div>
+                        <div class="check-btn">✓</div>
+                    </div>
+                    <div class="task-item" onclick="toggleTask(this)">
+                        <div class="task-info">
+                            <h3>Subject 6: Strategic Review</h3>
+                            <p>⏱️ Focus Window: 1.0 Hours</p>
+                        </div>
+                        <div class="check-btn">✓</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCREEN 3: GROUP CHAT -->
+            <div id="screen-chat" class="screen">
+                <h2 style="margin-bottom: 5px; font-weight: 800;">Squad Comm Box</h2>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">5 Active Competitors In Network</p>
+                
+                <div class="chat-container">
+                    <div class="chat-bubble friend"><strong>Rahul:</strong> Bhai aaj Target 1 hit kiya tumne?</div>
+                    <div class="chat-bubble me">Bilkul clear! Tracker 100% karke hi soenge aaj.</div>
+                    <div class="chat-bubble friend"><strong>Amit:</strong> Mera 3 slots complete ho chuka hai ऑलरेडी।</div>
+                    <div class="chat-bubble friend"><strong>Rohit:</strong> Consistency maintain rakho warriors! 🚀</div>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <input type="text" placeholder="Transmit message..." style="flex: 1; padding: 14px; border-radius: 14px; border: none; background: #1e293b; color: white; font-size: 0.9rem;">
+                    <button style="background: var(--accent-gradient); border: none; padding: 0 20px; border-radius: 14px; font-weight: bold; color: #020617; cursor: pointer;">Send</button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Bottom Native-feeling Navigation Tabs -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="switchScreen('home', this)">
+                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                Home
+            </button>
+            <button class="nav-item" onclick="switchScreen('dashboard', this)">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                Daily Tasks
+            </button>
+            <button class="nav-item" onclick="switchScreen('chat', this)">
+                <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                Squad Chat
+            </button>
+        </nav>
+
     </div>
-    <div class="main-content">
-        <div class="header">
-            <h1>Dashboard</h1>
-            <span>Welcome, Warrior!</span>
-        </div>
-        <div class="cards-container">
-            <div class="card">
-                <h3>Daily Tasks</h3>
-                <p>Track your daily activities with colorful energy.</p>
-            </div>
-            <div class="card">
-                <h3>Goal Tracker</h3>
-                <p>Monitor your progress visually.</p>
-            </div>
-            <div class="card">
-                <h3>Achievements</h3>
-                <p>See how far you've come now.</p>
-            </div>
-        </div>
-    </div>
+
+    <!-- App System Scripts -->
+    <script>
+        // Array of strong motivational quotes that alternate on refresh
+        const warriorQuotes = [
+            { q: "“He who conquers himself is the mightiest warrior.”", a: "Confucius" },
+            { q: "“No citizen has a right to be an amateur in the matter of physical or mental training.”", a: "Socrates" },
+            { q: "“The shield of consistency breaks the arrow of failure.”", a: "Warrior Creed" },
+            { q: "“Today you do what others won't, so tomorrow you can execute what others can't.”", a: "Anonymous" }
+        ];
+
+        // Randomize quote instantly on loading the app screen
+        window.onload = function() {
+            const index = Math.floor(Math.random() * warriorQuotes.length);
+            document.getElementById('daily-quote').innerText = warriorQuotes[index].q;
+            document.getElementById('quote-author').innerText = warriorQuotes[index].a;
+        };
+
+        // Screen Routing/Navigation controller
+        function switchScreen(screenId, button) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById('screen-' + screenId).classList.add('active');
+
+            document.querySelectorAll('.nav-item').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+        }
+
+        // Checklist controller
+        function toggleTask(element) {
+            element.classList.toggle('completed');
+            calculateProgress();
+        }
+
+        // Engine to process metrics dynamically
+        function calculateProgress() {
+            const totalTasks = document.querySelectorAll('.task-item').length;
+            const completedTasks = document.querySelectorAll('.task-item.completed').length;
+            const percentage = Math.round((completedTasks / totalTasks) * 100);
+
+            document.getElementById('progress-percent').innerText = percentage + '%';
+            document.getElementById('progress-fill').style.width = percentage + '%';
+        }
+    </script>
 </body>
 </html>
