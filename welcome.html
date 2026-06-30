@@ -13,6 +13,7 @@
             --accent-color: #38bdf8;
             --accent-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
             --warrior-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --friends-gradient: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
             --success-color: #4ade80;
             --text-main: #f8fafc;
             --text-muted: #64748b;
@@ -35,11 +36,11 @@
             padding: 10px;
         }
 
-        /* App Container: Simulates a real mobile app structure */
+        /* App Container: Optimized to 16:9 Desktop View Aspect Ratio */
         .app-container {
             width: 100%;
             max-width: 450px;
-            height: 850px;
+            height: 800px; /* 16:9 Aspect Ratio Simulation */
             background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
             border-radius: 35px;
             box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
@@ -78,12 +79,11 @@
         .welcome-container {
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             height: 100%;
             text-align: center;
-            gap: 25px;
-            padding-top: 20px;
+            padding: 10px 0;
         }
 
         .welcome-title {
@@ -104,50 +104,80 @@
             text-transform: uppercase;
         }
 
-        /* Big Bold Center Character/Avatar Card */
+        /* Beautiful Colorful Corner Card for Friends' Names */
+        .friends-card {
+            background: var(--friends-gradient);
+            padding: 15px 25px;
+            border-radius: 20px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .friends-card h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .friends-list {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .friend-name {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 4px 12px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
         .warrior-avatar-card {
-            width: 180px;
-            height: 180px;
+            width: 130px;
+            height: 130px;
             background: var(--warrior-gradient);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 35px rgba(239, 68, 68, 0.4);
-            border: 6px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            margin: 15px 0;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Using SVG for a clean, fierce warrior helmet emblem */
         .warrior-avatar-card svg {
-            width: 90px;
-            height: 90px;
+            width: 65px;
+            height: 65px;
             fill: #ffffff;
         }
 
-        /* Massive Central Motivation Quote Box */
         .motivation-container {
             background: rgba(30, 41, 59, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 25px;
+            padding: 20px;
             border-radius: 24px;
             width: 100%;
             backdrop-filter: blur(10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
         .quote-text {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            line-height: 1.6;
+            line-height: 1.5;
             color: #f1f5f9;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-style: italic;
         }
 
         .quote-author {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--accent-color);
@@ -187,14 +217,13 @@
             height: 14px;
             border-radius: 10px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .progress-bar-fill {
             background: linear-gradient(90deg, #00f2fe, #4ade80);
             width: 0%;
             height: 100%;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.3s ease;
         }
 
         .task-list {
@@ -205,27 +234,48 @@
 
         .task-item {
             background: #1e293b;
-            padding: 18px;
+            padding: 15px;
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-left: 6px solid var(--accent-color);
-            transition: all 0.2s ease;
-            cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            gap: 10px;
         }
 
         .task-item.completed {
             border-left-color: var(--success-color);
             background: #111827;
-            opacity: 0.5;
+            opacity: 0.6;
         }
 
-        .task-info h3 {
+        .task-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Customizable Text Field Input */
+        .task-input {
+            background: transparent;
+            border: none;
+            color: white;
             font-size: 1.05rem;
             font-weight: 700;
-            color: #ffffff;
+            width: 100%;
+            padding: 2px 0;
+            border-bottom: 1px dashed transparent;
+        }
+
+        .task-input:focus {
+            outline: none;
+            border-bottom-color: var(--accent-color);
+        }
+
+        .task-item.completed .task-input {
+            text-decoration: line-through;
+            color: var(--text-muted);
         }
 
         .task-info p {
@@ -234,23 +284,19 @@
             margin-top: 2px;
         }
 
-        .task-item.completed .task-info h3 {
-            text-decoration: line-through;
-            color: var(--text-muted);
-        }
-
         .check-btn {
             background: #334155;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            pointer-events: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .task-item.completed .check-btn {
@@ -263,12 +309,12 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            height: 480px;
+            height: 440px;
             overflow-y: auto;
             background: rgba(0,0,0,0.3);
             padding: 15px;
             border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .chat-bubble {
@@ -332,11 +378,6 @@
             width: 26px;
             height: 26px;
             fill: currentColor;
-            transition: transform 0.2s;
-        }
-
-        .nav-item.active svg {
-            transform: scale(1.1);
         }
     </style>
 </head>
@@ -344,7 +385,6 @@
 
     <div class="app-container">
         
-        <!-- Main Application Content Screen Switcher -->
         <main class="app-content">
 
             <!-- SCREEN 1: APP HOME PAGE (WELCOME SCREEN) -->
@@ -355,14 +395,23 @@
                         <h2 class="welcome-subtitle">Warrior!</h2>
                     </div>
 
-                    <!-- Large Center Accent Graphic (Warrior Helmet Mask) -->
+                    <!-- Colorful Design Box Displaying Friends' Names -->
+                    <div class="friends-card">
+                        <h4>Squad Active Members</h4>
+                        <div class="friends-list">
+                            <span class="friend-name">निशिकांत</span>
+                            <span class="friend-name">अमन</span>
+                            <span class="friend-name">कृष्णा</span>
+                            <span class="friend-name">राजवीर</span>
+                        </div>
+                    </div>
+
                     <div class="warrior-avatar-card">
                         <svg viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.47.16.03.3-.04.36-.19l1.12-3.13c-1.39-.44-2.45-1.63-2.77-3.15H9.5c.37 2.13 2.21 3.5 4.35 3.12 1.63-.29 2.85-1.58 3.07-3.12h1.94c-.37 2.13-2.21 3.5-4.35 3.12l1.09 3.06c.05.15.2.22.35.17C19.14 20.16 22 16.42 22 12c0-5.52-4.48-10-10-10zm0 4.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 10.38 9.5 9s1.12-2.5 2.5-2.5z"/>
                         </svg>
                     </div>
 
-                    <!-- Dynamic Motivation Quote Container in Center -->
                     <div class="motivation-container">
                         <div class="quote-text" id="daily-quote">"The format of your future is hidden in your daily execution."</div>
                         <div class="quote-author" id="quote-author">Comeback Protocol</div>
@@ -372,11 +421,10 @@
                 </div>
             </div>
 
-            <!-- SCREEN 2: DASHBOARD (TODO LIST) -->
+            <!-- SCREEN 2: DASHBOARD (EDITABLE TODO LIST) -->
             <div id="screen-dashboard" class="screen">
-                <h2 style="margin-bottom: 15px; font-weight: 800; font-size: 1.4rem;">July 1, 2026</h2>
+                <h2 style="margin-bottom: 15px; font-weight: 800; font-size: 1.4rem;">Daily Task Tracker</h2>
                 
-                <!-- Progress Widget -->
                 <div class="progress-card">
                     <div class="progress-text">Today's Protocol: <span id="progress-percent">0%</span> Cleared</div>
                     <div class="progress-bar-bg">
@@ -384,59 +432,59 @@
                     </div>
                 </div>
 
-                <!-- 6 Pre-set Daily Warrior Slots -->
+                <!-- 6 Dynamic Editable Slots -->
                 <div class="task-list">
-                    <div class="task-item" onclick="toggleTask(this)">
+                    <div class="task-item">
                         <div class="task-info">
-                            <h3>Subject 1: Core Target</h3>
+                            <input type="text" class="task-input" value="Subject 1: Core Target">
                             <p>⏱️ Focus Window: 2.0 Hours</p>
                         </div>
-                        <div class="check-btn">✓</div>
+                        <button class="check-btn" onclick="toggleTask(this)">✓</button>
                     </div>
-                    <div class="task-item" onclick="toggleTask(this)">
+                    <div class="task-item">
                         <div class="task-info">
-                            <h3>Subject 2: High Yield Revision</h3>
+                            <input type="text" class="task-input" value="Subject 2: High Yield Revision">
                             <p>⏱️ Focus Window: 1.5 Hours</p>
                         </div>
-                        <div class="check-btn">✓</div>
+                        <button class="check-btn" onclick="toggleTask(this)">✓</button>
                     </div>
-                    <div class="task-item" onclick="toggleTask(this)">
+                    <div class="task-item">
                         <div class="task-info">
-                            <h3>Subject 3: Intensive Drill</h3>
+                            <input type="text" class="task-input" value="Subject 3: Intensive Drill">
                             <p>⏱️ Focus Window: 1.0 Hours</p>
                         </div>
-                        <div class="check-btn">✓</div>
+                        <button class="check-btn" onclick="toggleTask(this)">✓</button>
                     </div>
-                    <div class="task-item" onclick="toggleTask(this)">
+                    <div class="task-item">
                         <div class="task-info">
-                            <h3>Subject 4: Critical Diagnostics</h3>
+                            <input type="text" class="task-input" value="Subject 4: Critical Diagnostics">
                             <p>⏱️ Focus Window: 2.0 Hours</p>
                         </div>
-                        <div class="check-btn">✓</div>
+                        <button class="check-btn" onclick="toggleTask(this)">✓</button>
                     </div>
-                    <div class="task-item" onclick="toggleTask(this)">
+                    <div class="task-item">
                         <div class="task-info">
-                            <h3>Subject 5: Backlog Liquidation</h3>
+                            <input type="text" class="task-input" value="Subject 5: Backlog Liquidation">
                             <p>⏱️ Focus Window: 1.5 Hours</p>
                         </div>
-                        <div class="check-btn">✓</div>
+                        <button class="check-btn" onclick="toggleTask(this)">✓</button>
                     </div>
-                    <div class="task-item" onclick="toggleTask(this)">
+                    <div class="task-item">
                         <div class="task-info">
-                            <h3>Subject 6: Strategic Review</h3>
+                            <input type="text" class="task-input" value="Subject 6: Strategic Review">
                             <p>⏱️ Focus Window: 1.0 Hours</p>
                         </div>
-                        <div class="check-btn">✓</div>
+                        <button class="check-btn" onclick="toggleTask(this)">✓</button>
                     </div>
                 </div>
             </div>
 
-            <!-- SCREEN 3: GROUP CHAT -->
+            <!-- SCREEN 3: WORKING FRONTEND GROUP CHAT -->
             <div id="screen-chat" class="screen">
                 <h2 style="margin-bottom: 5px; font-weight: 800;">Squad Comm Box</h2>
                 <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">5 Active Competitors In Network</p>
                 
-                <div class="chat-container">
+                <div class="chat-container" id="chat-box">
                     <div class="chat-bubble friend"><strong>Rahul:</strong> Bhai aaj Target 1 hit kiya tumne?</div>
                     <div class="chat-bubble me">Bilkul clear! Tracker 100% karke hi soenge aaj.</div>
                     <div class="chat-bubble friend"><strong>Amit:</strong> Mera 3 slots complete ho chuka hai ऑलरेडी।</div>
@@ -444,14 +492,13 @@
                 </div>
                 
                 <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <input type="text" placeholder="Transmit message..." style="flex: 1; padding: 14px; border-radius: 14px; border: none; background: #1e293b; color: white; font-size: 0.9rem;">
-                    <button style="background: var(--accent-gradient); border: none; padding: 0 20px; border-radius: 14px; font-weight: bold; color: #020617; cursor: pointer;">Send</button>
+                    <input type="text" id="chat-input" placeholder="Transmit message..." style="flex: 1; padding: 14px; border-radius: 14px; border: none; background: #1e293b; color: white; font-size: 0.9rem;">
+                    <button onclick="sendMessage()" style="background: var(--accent-gradient); border: none; padding: 0 20px; border-radius: 14px; font-weight: bold; color: #020617; cursor: pointer;">Send</button>
                 </div>
             </div>
 
         </main>
 
-        <!-- Bottom Native-feeling Navigation Tabs -->
         <nav class="bottom-nav">
             <button class="nav-item active" onclick="switchScreen('home', this)">
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -469,9 +516,7 @@
 
     </div>
 
-    <!-- App System Scripts -->
     <script>
-        // Array of strong motivational quotes that alternate on refresh
         const warriorQuotes = [
             { q: "“He who conquers himself is the mightiest warrior.”", a: "Confucius" },
             { q: "“No citizen has a right to be an amateur in the matter of physical or mental training.”", a: "Socrates" },
@@ -479,14 +524,12 @@
             { q: "“Today you do what others won't, so tomorrow you can execute what others can't.”", a: "Anonymous" }
         ];
 
-        // Randomize quote instantly on loading the app screen
         window.onload = function() {
             const index = Math.floor(Math.random() * warriorQuotes.length);
             document.getElementById('daily-quote').innerText = warriorQuotes[index].q;
             document.getElementById('quote-author').innerText = warriorQuotes[index].a;
         };
 
-        // Screen Routing/Navigation controller
         function switchScreen(screenId, button) {
             document.querySelectorAll('.screen').forEach(screen => {
                 screen.classList.remove('active');
@@ -499,22 +542,16 @@
             button.classList.add('active');
         }
 
-        // Checklist controller
-        function toggleTask(element) {
-            element.classList.toggle('completed');
+        // Updated Checklist & Progress Logic
+        function toggleTask(button) {
+            const taskItem = button.parentElement;
+            taskItem.classList.toggle('completed');
             calculateProgress();
         }
 
-        // Engine to process metrics dynamically
         function calculateProgress() {
             const totalTasks = document.querySelectorAll('.task-item').length;
             const completedTasks = document.querySelectorAll('.task-item.completed').length;
             const percentage = Math.round((completedTasks / totalTasks) * 100);
 
-            document.getElementById('progress-percent').innerText = percentage + '%';
-            document.getElementById('progress-fill').style.width = percentage + '%';
-        }
-    </script>
-</body>
-                                           </html>
-                                           
+            document.getElementById('progress-percent').innerText = pe
