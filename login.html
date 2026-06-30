@@ -12,5 +12,28 @@
         <input type="password" name="password" required><br><br>
         <button type="submit" name="submit">Login</button>
     </form>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDVAV-W2_K5RxLxpQ63rSH0XKRDAKqZ1cs",
+          authDomain: "comeback-warrior.firebaseapp.com",
+          projectId: "comeback-warrior",
+          storageBucket: "comeback-warrior.firebasestorage.app",
+          messagingSenderId: "465727697366",
+          appId: "1:465727697366:web:46b38b1564869d1f78b477",
+          measurementId: "G-TTGQ6V073E"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        console.log("Firebase successfully connected!");
+    </script>
 </body>
-</html>  
+</html>
